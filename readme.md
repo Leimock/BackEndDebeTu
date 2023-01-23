@@ -7,6 +7,7 @@
 - mongoose: ORM mongoDB 
 - dotenv: variables de entorno
 - morgan: logger
+- bcrypt: encriptar/desencriptar constraseñas
 
 
 ## Base de datos

@@ -5,18 +5,37 @@ const findAll = async (req, res) => {
         const users = await usersService.findAll()
         res.status(200).json(users)
     } catch(err) {
-        res.status(500).json({user: 'Error al obtener los mensajes: ' + err})
+        res.status(500).json({message: 'Error al obtener los usuarios: ' + err})
+    }
+}
+
+const findById = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await usersService.findById(userId)
+        res.status(200).json(user)
+    } catch(err) {
+        res.status(500).json({message: 'Error al obtener el usuario: ' + err})
     }
 }
 
 const save = async (req, res) => {
     try{
         const data = req.body
-        const usersSave = await usersService.save(data)
-        res.status(200).json(usersSave)
+        const userSave = await usersService.save(data)
+        res.status(200).json(userSave)
     }catch(err) {
-        res.status(500).json({user: 'Error al crear el nuevo mensaje.' + err})
+        res.status(500).json({message: 'Error al crear el nuevo usuario: ' + err})
     }
 }
 
-export {findAll, save}
+const removeAll = async (req, res) => {
+    try {
+        await usersService.removeAll()
+        res.status(200).json({message: 'Usuarios borrados'})
+    }catch(err) {
+        res.status(500).json({message: 'Error al borrar los usuarios: ' + err})
+    }
+}
+
+export {findAll, findById, save, removeAll}
