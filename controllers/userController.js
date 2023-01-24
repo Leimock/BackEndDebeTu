@@ -22,8 +22,11 @@ const findById = async (req, res) => {
 const save = async (req, res) => {
     try{
         const data = req.body
+        console.log(data)
         const userSave = await usersService.save(data)
+        console.log(userSave)
         res.status(200).json(userSave)
+
     }catch(err) {
         res.status(500).json({message: 'Error al crear el nuevo usuario: ' + err})
     }
