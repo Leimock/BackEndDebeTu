@@ -8,6 +8,7 @@
 - dotenv: variables de entorno
 - morgan: logger
 - bcrypt: encriptar/desencriptar constraseñas
+- jsonwebtoken- generar token de autenticacion
 
 
 ## Base de datos
