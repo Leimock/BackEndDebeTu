@@ -1,5 +1,15 @@
 import * as usersService from '../services/usersService.js'
 
+const findMe = async (req, res) => {
+    try {
+        const email = req.body.email
+        const user = await usersService.findByEmail(email)
+        res.status(200).json(user)
+    }catch(err) {
+        res.status(500).json({message: 'Error al obtener el usuario: ' + err})
+    }
+}
+
 const findAll = async (req, res) => {
     try {
         const users = await usersService.findAll()
@@ -41,4 +51,5 @@ const removeAll = async (req, res) => {
     }
 }
 
-export {findAll, findById, save, removeAll}
+
+export {findAll, findById, save, removeAll, findMe}

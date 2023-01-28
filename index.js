@@ -6,6 +6,8 @@ import messageRouter from "./routers/messageRouter.js"
 import cors from 'cors'
 import userRouter from "./routers/userRouter.js"
 import authRouter from "./routers/authRouter.js"
+import passport from "passport"
+import passportMiddleware from "./middlewares/passport.js"
 
 dotenv.config()
 const app = express()
@@ -15,6 +17,9 @@ app.use(express.json())
 app.use(cors())
 
 app.use(morgan('tiny'))
+
+app.use(passport.initialize())
+passport.use(passportMiddleware)
 
 app.get('/', (req, res) => {
     res.status(200).send('Bienvenido al API de debeTu')

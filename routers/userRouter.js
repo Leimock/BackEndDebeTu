@@ -1,18 +1,23 @@
 import { Router } from "express"
+import passport from "passport"
 import * as userController from '../controllers/userController.js'
 
 const userRouter = Router()
 
 // listar todos los usuarios
-userRouter.get('/', userController.findAll)
+userRouter.get('/listAll', 
+  //passport.authenticate('jwt', {session: false}),  
+  userController.findAll)
 
 // listar un usuario a partir de su id
 userRouter.get('/:id', userController.findById)
 
 // añadir un nuevo usuarios
-userRouter.post('/', userController.save)
+userRouter.post('/add', userController.save)
 
 // borrar todos los usuarios
-userRouter.delete('/', userController.removeAll)
+userRouter.delete('/', passport.authenticate('jwt', {session: false}), userController.removeAll)
+
+userRouter.post('/', passport.authenticate('jwt', {session: false}), userController.findMe)
 
 export default userRouter

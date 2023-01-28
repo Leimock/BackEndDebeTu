@@ -9,6 +9,8 @@
 - morgan: logger
 - bcrypt: encriptar/desencriptar constraseñas
 - jsonwebtoken- generar token de autenticacion
+- passport: autenticacion
+- passport-jwt: autenticacion
 
 
 ## Base de datos
