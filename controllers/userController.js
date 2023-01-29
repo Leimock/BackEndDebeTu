@@ -2,8 +2,9 @@ import * as usersService from '../services/usersService.js'
 
 const findMe = async (req, res) => {
     try {
-        const email = req.body.email
-        const user = await usersService.findByEmail(email)
+        const userLogger = req.user
+        const id = userLogger._id
+        const user = await usersService.findById(id)
         res.status(200).json(user)
     }catch(err) {
         res.status(500).json({message: 'Error al obtener el usuario: ' + err})

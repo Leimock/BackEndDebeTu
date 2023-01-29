@@ -18,6 +18,6 @@ userRouter.post('/add', userController.save)
 // borrar todos los usuarios
 userRouter.delete('/', passport.authenticate('jwt', {session: false}), userController.removeAll)
 
-userRouter.post('/', passport.authenticate('jwt', {session: false}), userController.findMe)
+userRouter.get('/', passport.authenticate('jwt', {session: false}), userController.findMe)
 
 export default userRouter
