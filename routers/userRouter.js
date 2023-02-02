@@ -10,7 +10,7 @@ userRouter.get('/listAll',
   userController.findAll)
 
 // listar un usuario a partir de su id
-userRouter.get('/:id', userController.findById)
+userRouter.get('/me', passport.authenticate('jwt', {session: false}), userController.findMe)
 
 // añadir un nuevo usuarios
 userRouter.post('/add', userController.save)
@@ -18,6 +18,6 @@ userRouter.post('/add', userController.save)
 // borrar todos los usuarios
 userRouter.delete('/', passport.authenticate('jwt', {session: false}), userController.removeAll)
 
-userRouter.get('/', passport.authenticate('jwt', {session: false}), userController.findMe)
+userRouter.get('/id/:id', userController.findById)
 
 export default userRouter
