@@ -1,18 +1,31 @@
-import { Connection } from "../models/connection"
+import { Connection } from "../models/connection.js";
 
 
-const connectToCreditor = async (userIdCreditor, userIdDebtor) => {
+
+const connectToCreditor = async(userIdCreditor, userIdDeptor)=>{
     const newConnection = new Connection()
-
-    newConnection.creditor = userIdCreditor
-    newConnection.debtor = userIdDebtor
-    newConnection.debts = []
-
+    newConnection.creditor=userIdCreditor
+    newConnection.debtor=userIdDeptor
+    newConnection.debts=[]
     return await newConnection.save()
 }
 
-const disconnectToCreditor = async (idConnection) => await Connection.findByIdAndUpdate(idConnection, {active: false})
+const disconnectToCreditor = async(idConnection)=>
+    await Connection.findByIdAndUpdate(idConnection, {active:false})
 
-const getConnectionfromUsersIds = async (userIdCreditor, userIdDebtor) => await Connection.findOne({creditor: userIdCreditor, debtor: userIdDebtor})
+const getConnectionFromUsersIds= async(userIdCreditor, userIdDeptor) => 
+    await Connection.find(
+        {deptor: userIdDeptor, creditor:userIdCreditor}
+    )
 
-export {connectToCreditor, disconnectToCreditor, getConnectionfromUsersIds}
+const getDebtorsByIdCreditor = async (myIdUserLogged) => await Connection.find({ creditor: myIdUserLogged }).populate('debtor').populate('debts')
+
+const getCreditorsByIdDebtor = async (myIdUserLogged) => await Connection.find({ debtor: myIdUserLogged }).populate('creditor').populate('debts')
+
+const addDebt = async (idConnection, debtData) => {
+    const connection = await Connection.findById(idConnection)
+    connection.debts.push(debtData)
+    return await connection.save()
+}
+
+export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getDebtorsByIdCreditor, getCreditorsByIdDebtor, addDebt}
