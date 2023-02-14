@@ -28,4 +28,10 @@ const addDebt = async (idConnection, debtData) => {
     return await connection.save()
 }
 
-export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getDebtorsByIdCreditor, getCreditorsByIdDebtor, addDebt}
+const deleteDebt = async (idConnection, idDebt) => {
+    const connection = await Connection.findById(idConnection)
+    connection.debts.pull({_id: idDebt})
+    return await connection.save()
+}
+
+export {connectToCreditor, disconnectToCreditor, getConnectionFromUsersIds, getDebtorsByIdCreditor, getCreditorsByIdDebtor, addDebt, deleteDebt}

@@ -89,6 +89,16 @@ async function getMyDebtors(req, res) {
   }
   
   async function removeDebt(req, res) {
+    
+    const idDebt = req.body._id
+    const idConnection = req.params.idConexion
+
+    try {
+        const deleted = await connectionServices.deleteDebt(idConnection, idDebt)
+        res.status(200).json(deleted)
+    } catch (err) {
+        res.status(500).json({mensaje: 'error al borrar la deuda:' + err})
+    }
 
   }
 
