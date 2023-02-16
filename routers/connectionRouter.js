@@ -12,7 +12,7 @@ connectionRouter.get('/getMyDebtors', passport.authenticate('jwt', {session: fal
 
 connectionRouter.get('/getMyCreditors', passport.authenticate('jwt', {session: false}), connectionController.getMyCreditors)
 
-connectionRouter.post('/addDebt/:idConexion', passport.authenticate('jwt', {session: false}), connectionController.addDebt)
+connectionRouter.put('/addDebt/:idConexion', passport.authenticate('jwt', {session: false}), connectionController.addDebt)
 
 connectionRouter.delete('/deleteDebt/:idConexion', passport.authenticate('jwt', {session: false}), connectionController.removeDebt)
 
